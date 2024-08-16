@@ -18,9 +18,15 @@ Sí ya se tiene una aplicación web, no es necesario hacer una aplicación nativ
 - Push server (permite hacer notificaciones desde la pwa al dispositivo),
 - indexedDB (permite guardar cambios offline o posteos en una base de datos aunque el usuario no tiene una internet),
 - Manifest (es un archivo json que dice como va a lucir la app cuando esté en el homescreen del dispositivo),
-- Service Worker (el corazón de una PWA que es un archivo js)
+- Service Worker (*el corazón de una PWA que es un archivo js plano -como sw.js-, al hacerse una petición a internet, este intercepta las peticiones como un proxy y este usa un cache que permite acceder a información de forma rápida o información cacheada sí está offline. Este corre en el background en un hilo independiente de la página web como si fuera una aplicación independiente. Al usarse o accederse a este sí no está instalado, se descarga el js, se parsea o revisa, se instala y activa sí no ha habido ningún error. Una vez instalado pasa al paso waiting en que espera a que se desactiven otros service worker para ejecutarse y tomar el control.*)
 
+Las aplicaciones PWA deben de service en un protocolo seguro HTTPS (con excepción del localhost que accede al dispositivo). 
 
-  
+### Recursos
+
+[1- que son las pwas.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/1quesonlaspwas-230127-134659.pdf)
+[2- Por que construir una pwa.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/2Porqueconstruirunapwa-230127-134659.pdf)
+[3- Conceptos clave de las PWA.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/3ConceptosclavedelasPWA-230127-134659.pdf)
+
 
 
