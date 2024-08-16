@@ -22,11 +22,12 @@ Sí ya se tiene una aplicación web, no es necesario hacer una aplicación nativ
 
 Las aplicaciones PWA deben de service en un protocolo seguro HTTPS (con excepción del localhost que accede al dispositivo). 
 
-### Recursos
+#### Recursos
 
 - [1- que son las pwas.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/1quesonlaspwas-230127-134659.pdf)
 - [2- Por que construir una pwa.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/2Porqueconstruirunapwa-230127-134659.pdf)
 - [3- Conceptos clave de las PWA.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/3ConceptosclavedelasPWA-230127-134659.pdf)
 
+### Sección 3: Reforzamiento Promesas, Fetch API y HttpServer
 
 
