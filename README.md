@@ -32,9 +32,64 @@ PWA solo funciona con localhost usando http (no con ips) o https.
 
 ### Sección 3: Reforzamiento Promesas, Fetch API y HttpServer
 
+_PROMESAS_
+
 - Instalar servidor web de forma global (basado en nodejs): `npm install http-server -g`
 - Ejecutar servidor en carpeta actual en el puerto 8080: `http-server -p 8080`
 - Ejecutar cualquier archivo js: `node <archivo.js>`
+
+Algunas equivalencias:
+
+```js
+const sumarUno ( numero ) => {
+    return new Promise( (resolve, reject) => {
+         if (numero >= 7) {
+            reject('El número es muy alto')
+         }
+         setTimeOut(()=>{resolve(numero+1)}, 800)
+    })
+}
+// 1
+sumarUno( 5 )
+    .then( function (nuevoValor) {
+        return sumarUno( nuevoValor )    // devuelve una nueva promesa cuyo resultado puede ser capturado en el próximo .then()
+    })
+// 2 conversión a función de flecha function | (arg) {sentence(arg)} | (arg) => {sentence(arg)} | arg => sentence(arg) | sentence
+sumarUno( 5 )
+    .then( nuevoValor  => sumarUno( nuevoValor ) )
+// 3  arg => sentence(arg) | sentence
+sumarUno( 5 )
+    .then( sumarUno )
+    .catch( error => console.log(error))
+// 4 forma completa simplificada
+sumarUno( 5 )
+    .then( sumarUno )
+    .then( sumarUno )
+    .catch( console.log )
+
+// --- prom-3.js
+sumarUno(3).then(console.log)
+sumarUno(5).then(console.log) // node prom-3.js > 4 y 6
+// -- usando Promise.all
+Promise.all([sumarUno(3), sumarUno(5), true, 'Hola mundo'])
+    .then( respuestas => {
+        console.log(respuestas)
+    }) // o mejor .then(console.log)
+    .catch(console.log)
+    // Respuesta: array [4, 5, true, 'Hola mundo']
+    // Sí alguna de las promesas devuelve un error (reject) entonces el catch mostraría este
+    // y no se obtendrían más resultados como aquí al ser el número del argumento >=7:
+ Promise.all([sumarUno(3), sumarUno(7), true, 'Hola mundo'])
+    .then( respuestas => {
+        console.log(respuestas)
+    }) // o mejor .then(console.log)
+    .catch(console.log)
+    // Respuesta del catch: El número es muy alto
+
+// El Promise.race() a diferencia del Promise.all() devuelve la primera respuesta obtenida (la más rápida)
+```
+
+_FETCH API_
 
 #### Fuentes
 
