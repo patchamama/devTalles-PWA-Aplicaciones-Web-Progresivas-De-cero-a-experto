@@ -32,6 +32,33 @@ PWA solo funciona con localhost usando http (no con ips) o https.
 
 ### Sección 3: Reforzamiento Promesas, Fetch API y HttpServer
 
+_CALLBACK_
+
+```js
+const sumarUno ( numero, callback ) => {
+    if (numero >= 7) {
+    callback('El número es muy alto');
+    return;
+    }
+    setTimeOut(()=> callback (null, numero + 1), 800);
+}
+
+
+sumarUno( 5, function (error, nuevoValor) {
+    ir (error) {
+        console.log(error);
+        return;
+    }
+    sumarUno( nuevoValor, function (error, nuevoValor2) {
+        ir (error) {
+            console.log(error);
+            return;
+        }
+        console.log(nuevoValor2)
+    }
+})
+```
+
 _PROMESAS_
 
 - Instalar servidor web de forma global (basado en nodejs): `npm install http-server -g`
