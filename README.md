@@ -54,7 +54,13 @@ sumarUno( 5, function (error, nuevoValor) {
             console.log(error);
             return;
         }
-        console.log(nuevoValor2)
+        sumarUno( nuevoValor, function (error, nuevoValor3) {
+            ir (error) {
+                console.log(error);
+                return;
+            }
+            console.log(nuevoValor3)
+        }
     }
 })
 ```
