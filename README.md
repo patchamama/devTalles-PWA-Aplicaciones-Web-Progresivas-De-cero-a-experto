@@ -124,6 +124,40 @@ Promise.all([sumarUno(3), sumarUno(5), true, 'Hola mundo'])
 
 _FETCH API_
 
+[API de pruebas para peticiones - reqres.in](https://reqres.in/)
+
+```js
+fetch('https//reqres.in/api/users')
+  .then((resp) => resp.json())
+  .then((respObj) => {
+    console.log(respObj)
+    console.log(respObj.page)
+  })
+```
+
+- Petición POST
+
+```js
+let usuario = {
+  nombre: 'Fernando',
+  edad: 32
+}
+
+fetch('https://reqres.in/api/users', {
+  method: 'POST', // PUT, DELETE,...
+  body: JSON.stringify(usuario), // data
+  headers: {
+    'Content-Type': 'application/json'
+  }
+})
+  .then((resp) => resp.json())
+  .then(console.log)
+  .catch((error) => {
+    console.log('Error en la petición')
+    console.log(error)
+  })
+```
+
 #### Fuentes
 
 - https://www.npmjs.com/package/http-server
@@ -132,3 +166,5 @@ _FETCH API_
 - [Promise.race()](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Promise/race)
 - [Promise.resolve()](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Promise/resolve)
 - [Promise.reject()](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Promise/reject)
+- [Fetch Methods](https://developer.mozilla.org/en-US/docs/Web/API/Response)
+- [Chrome Cors Plugin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
