@@ -158,6 +158,31 @@ fetch('https://reqres.in/api/users', {
   })
 ```
 
+- Response.clone() y manejo de respuestas y errores
+
+```js
+fetch('https://reqres.in/api/users/1000')
+    .then( resp => {
+        if ( resp.ok ) {  // resp.ok = true and resp.status = 200
+            resp.clone().json()  // Clona la respuesta para que se pueda volver a usar en otro resp.json() u otro tipo de llamada
+                .then( { console.log } ); // Respuesta normal que se devuelve y se puede usar para trabajar con los resultados como objetos para actualizar el caché, localStore...
+            // Sí fuera necesario más capturas de respuestas, sería necesario agregar más:
+            // resp.clone().json().then( { ...código aquí adicional... } );
+            return resp.json();
+        } else {  // resp.ok = false and resp.status = 404 (not found) u otro error.
+            // Los errores como el 404 (no existe) no generan un reject, sino un resolve con el valor de resp.clone()
+            // que contiene el status y los headers de la respuesta original.
+            // console.log('No existe el usuario 1000');
+            throw new Error('No existe el usuario 1000'); // Esto genera un reject, que se captura por el catch
+        }
+    })
+    .then( console.log )  // se captura aquí el resultado de la respuesta resp.json(), ya sea el objeto o el texto.
+    .catch( error => {
+        console.log('Error en la petición');
+        console.log(error);
+    });
+```
+
 #### Fuentes
 
 - https://www.npmjs.com/package/http-server
