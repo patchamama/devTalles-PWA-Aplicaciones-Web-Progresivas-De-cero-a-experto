@@ -222,3 +222,24 @@ _`resp => resp.json()` serializa los datos de un resultado de tipo ReadeableStre
 - [XmlHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState)
 - [Methods del response](https://developer.mozilla.org/es/docs/Web/API/Response#methods)
 - [Fetch API](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch)
+
+### Sección 4: Service Worker y Fetch Events
+
+_Para que un service worker funcione, debe estar instalado en el navegador del usuario y tener un certificado ssl la URL a visitar o donde está desplegado._
+_Es un archivo js que está pendiente de sucesos y tiene muchos AddEventListener() en dependencia de diferentes eventos: install, activate, push, fetch, sync, message._
+_El service worker trabaja en el background en su propio hilo, como un proxy entre la internet y la app web, también mantiene ejecutando en el background mandando notificaciones aunque se cierre el navegador y puede estar con una relación 1:1 o 1:muchos tabs abiertos. Nos permite hacer actualizaciones en el background, actualizar el cache, una base de datos, etc._
+
+```sh
+cd 02-service-worker
+http-server -p 8080
+open http://localhost:8080
+```
+
+#### Fuentes
+
+- [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/)
+- [Service Worker Lifecycle](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API)
+- [Fetch Event](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)
+- [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
+- [Cache Storage API](https://developer.mozilla.org/es/docs/Web/API/CacheStorage)
+- [Cache Keys](https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker#cache_keys)
