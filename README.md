@@ -206,6 +206,8 @@ fetch('no-encontrado.html')
   })
 ```
 
+_`resp => resp.json()` serializa los datos de un resultado de tipo ReadeableStream como un JSON._
+
 #### Fuentes
 
 - https://www.npmjs.com/package/http-server
@@ -216,3 +218,7 @@ fetch('no-encontrado.html')
 - [Promise.reject()](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Promise/reject)
 - [Fetch Methods](https://developer.mozilla.org/en-US/docs/Web/API/Response)
 - [Chrome Cors Plugin](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
+- [URL - CreateObjectUrl](https://developer.mozilla.org/en-US/docs/Web/API/URL)
+- [XmlHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState)
+- [Methods del response](https://developer.mozilla.org/es/docs/Web/API/Response#methods)
+- [Fetch API](https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch)
