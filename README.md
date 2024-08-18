@@ -183,6 +183,29 @@ fetch('https://reqres.in/api/users/1000')
     });
 ```
 
+- Leer archivos HTML
+
+```js
+fetch('no-encontrado.html')
+  .then((resp) => {
+    if (resp.ok) {
+      // resp.ok = true and resp.status = 200 (ok).
+      return resp.text()
+    } else {
+      // resp.ok = false and resp.status = 404 (not found) u otro error.
+      throw new Error(`No existe el archivo ${resp.url}`) // Esto genera un reject, que se captura por el catch pues el error 404 no genera un reject
+    }
+  })
+  .then((html) => {
+    let body = document.querySelector('body')
+    body.innerHTML = html
+  })
+  .catch((error) => {
+    console.log('Error en la petición')
+    console.log(error)
+  })
+```
+
 #### Fuentes
 
 - https://www.npmjs.com/package/http-server
