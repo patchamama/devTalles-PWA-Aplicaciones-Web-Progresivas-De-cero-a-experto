@@ -375,6 +375,10 @@ if (navigator.serviceWorker) {
 - [Can I Use : Sync Manager](https://caniuse.com/?search=syncmanager)
 - [Service Worker Lifecycle](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API)
 
+### Sección 6: Estrategias de Cache y Offline Mode
+
+#### Fuentes
+
 - [Fetch Event](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)
 - [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
 - [Cache Storage API](https://developer.mozilla.org/es/docs/Web/API/CacheStorage)
