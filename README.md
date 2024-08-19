@@ -284,9 +284,97 @@ _Sí ha habido al menos un cambio en al archivo del SW, el navegador intentará 
 
 ### Sección 5: Ciclo de vida de un Service Worker y los listeners más comunes
 
+Entre los listeners más comunes están:
+
+- fetch `self.addEventListener('fetch', event => {` // FETCH: Manejo de peticiones HTTP y se aplican estrategias del caché
+- sync `self.addEventListener('sync', event => {` // SYNC: Recuperamos la conexión a internet
+- install `self.addEventListener('install', event => {` // Descargar assets y creamos un cache de assets
+- activate `self.addEventListener('activate', event => {` // // Cuando el SW toma el control de la aplicación y es bueno borrar caché viejo
+- push `self.addEventListener('push', event => {` // PUSH: Manejar las push notifications
+  En la app se realiza `Notification.requestPermission().then( result => {` y `reg.showNotification(Mensaje-aquí-de-notificación);`
+
+```js
+// ---------------------------------------------
+// sw.js
+
+// Ciclo de vida del SW
+
+self.addEventListener('install', (event) => {
+  // Descargar assets
+  // Creamos un cache
+  console.log('SW: Instalando SW')
+
+  const instalacion = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('SW: Instalaciones terminadas')
+      self.skipWaiting() // no es lo más recomendable pues puede que el usuario esté en una conexión lenta descargando alguna información importante o haciendo un push y esto puede determinar que se pierda información
+      resolve()
+    }, 1)
+  })
+
+  event.waitUntil(instalacion) // Espera a que la promesa se resuelva para continuar con el SW
+})
+
+// Cuando el SW toma el control de la aplicación
+self.addEventListener('activate', (event) => {
+  // Borrar cache viejo
+
+  console.log('SW2: Activo y listo para controlar la app')
+})
+
+// FETCH: Manejo de peticiones HTTP
+self.addEventListener('fetch', (event) => {
+  // Aplicar estrategias del cache
+  // console.log( 'SW:', event.request.url );
+  // if ( event.request.url.includes('https://reqres.in/') ) {
+  //     const resp = new Response(`{ ok: false, mensaje: 'jajaja'}`);
+  //     event.respondWith( resp );
+  // }
+})
+
+// SYNC: Recuperamos la conexión a internet
+self.addEventListener('sync', (event) => {
+  console.log('Tenemos conexión!')
+  console.log(event)
+  console.log(event.tag) // cada tag es un evento que se dispara en el syncManager en el app.js
+})
+
+// PUSH: Manejar las push notifications
+self.addEventListener('push', (event) => {
+  console.log('Notificacion recibida')
+})
+
+// ---------------------------------------------
+// app.js
+
+// Detectar si podemos usar Service Workers
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/sw.js').then((reg) => {
+    // setTimeout(() => {
+
+    //     reg.sync.register('posteo-gatitos');
+    //     console.log('Se enviaron fotos de gatitos al server');
+
+    // }, 3000);
+    Notification.requestPermission().then((result) => {
+      console.log(result)
+      reg.showNotification('Hola Mundo!')
+    })
+  })
+}
+
+// if ( window.SyncManager ) { }
+
+// fetch('https://reqres.in/api/users')
+//     .then( resp => resp.text() )
+//     .then( console.log );
+```
+
 #### Fuentes
 
+- [Can I Use : Sync Manager](https://caniuse.com/?search=syncmanager)
 - [Service Worker Lifecycle](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API)
+
 - [Fetch Event](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)
 - [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
 - [Cache Storage API](https://developer.mozilla.org/es/docs/Web/API/CacheStorage)
