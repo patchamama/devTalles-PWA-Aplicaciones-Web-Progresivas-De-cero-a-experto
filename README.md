@@ -377,6 +377,8 @@ if (navigator.serviceWorker) {
 
 ### Sección 6: Estrategias de Cache y Offline Mode
 
+_El alcance de los caches es por dominio (scope)._
+
 - Crear un cache para almacenar los datos de la aplicación
 
 ```js
@@ -384,22 +386,28 @@ self.addEventListener('install', (event) => {
     console.log('Instalando Service Worker')
     if (window.caches) {
         const cacheName = 'v1';
-        caches.open(cacheName).then(cache => { // Crea la key v1 en el caché y devuelve una promesa con el caché abierto
+        const cacheProm = caches.open(cacheName)
+            .then(cache => { // Crea la key v1 en el caché y devuelve una promesa con el caché abierto
             //     cache.add('/index.html');
 
             const cacheAssets = [  // Archivos a almacenar en el caché
-                'index.html',
-                'assets/style.css',
-                'assets/icon.png',
+                '/', // es importante agregar el slash al final para que sea un caché de dominio
+                '/index.html',
+                '/assets/style.css',
+                '/assets/icon.png',
+                '/js/app.js',
+                'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' // se puede cachear una url
             ]
-            cache.addAll(cacheAssets).then(() => {  // Agrega los archivos a la cache
+            return cache.addAll(cacheAssets).then(() => {  // Agrega los archivos a la cache
                 console.log('Assets cargados en cache')
-                cache.delete('assets/style.css')  // Elimina un archivo de la cache
+                cache.delete('/assets/style.css')  // Elimina un archivo de la cache
 
-                cache.put('index.html', new Response('Nuevo contenido')); // Actualiza un archivo en el caché
+                cache.put('/index.html', new Response('Nuevo contenido')); // Actualiza un archivo en el caché
             });
 
-            cache.match('index.html').then(response => { // I existe un archivo en el caché lo lee y devuelve una respuesta con el contenido del archivo
+            //event.waitUntil(cacheProm); // Espera a que se complete la operación
+
+            cache.match('/index.html').then(response => { // I existe un archivo en el caché lo lee y devuelve una respuesta con el contenido del archivo
                 response.text().then(text => console.log(text)) ) // Obtiene el texto de la respuesta
             });
         });
@@ -409,7 +417,19 @@ self.addEventListener('install', (event) => {
 
     }
 });
+```
 
+_APP SHELL: es todo lo que la aplicación necesita para funcionar y puede ser conveniente dejarlo en el caché (css, index, ...)._
+
+Estrategias del caché (en el elemento fetch del EventListener):
+
+- **Cache Only**: solo se carga el archivo si existe en el caché. Si no, se descarga del servidor, es decir, se almacena todo en el caché para después acceder a estos archivos desde este.
+
+```js
+self.addEventListener('fetch', (e) => {
+    // 1 - Cache Only
+    e.respondWith(caches.match(e.request); // Si existe en el caché, devuelve una respuesta con el contenido del archivo
+});
 ```
 
 #### Fuentes
