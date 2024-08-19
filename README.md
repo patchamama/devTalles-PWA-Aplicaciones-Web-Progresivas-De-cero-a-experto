@@ -377,8 +377,44 @@ if (navigator.serviceWorker) {
 
 ### Sección 6: Estrategias de Cache y Offline Mode
 
+- Crear un cache para almacenar los datos de la aplicación
+
+```js
+self.addEventListener('install', (event) => {
+    console.log('Instalando Service Worker')
+    if (window.caches) {
+        const cacheName = 'v1';
+        caches.open(cacheName).then(cache => { // Crea la key v1 en el caché y devuelve una promesa con el caché abierto
+            //     cache.add('/index.html');
+
+            const cacheAssets = [  // Archivos a almacenar en el caché
+                'index.html',
+                'assets/style.css',
+                'assets/icon.png',
+            ]
+            cache.addAll(cacheAssets).then(() => {  // Agrega los archivos a la cache
+                console.log('Assets cargados en cache')
+                cache.delete('assets/style.css')  // Elimina un archivo de la cache
+
+                cache.put('index.html', new Response('Nuevo contenido')); // Actualiza un archivo en el caché
+            });
+
+            cache.match('index.html').then(response => { // I existe un archivo en el caché lo lee y devuelve una respuesta con el contenido del archivo
+                response.text().then(text => console.log(text)) ) // Obtiene el texto de la respuesta
+            });
+        });
+
+        // Listar los archivos en el caché (keys)
+        caches.keys().then(key => console.log('Key', key))
+
+    }
+});
+
+```
+
 #### Fuentes
 
+- Cache Storage MDN](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage)
 - [Fetch Event](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)
 - [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
 - [Cache Storage API](https://developer.mozilla.org/es/docs/Web/API/CacheStorage)
