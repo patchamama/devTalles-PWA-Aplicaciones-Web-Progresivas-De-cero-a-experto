@@ -235,9 +235,53 @@ http-server -p 8080
 open http://localhost:8080
 ```
 
+- Código de ejemplo:
+
+```js
+//if ('serviceWorker' in navigator) {
+if (navigator.serviceWorker) {
+  // Chequear sí Service Worker está instalado en el navegador
+  navigator.serviceWorker.register('/sw.js') // Instalar el SW que está en el archivo sw.js
+  console.log('SW installed')
+
+  self.addEventListener('fetch', (event) => {
+    console.log('SW fetch event', event)
+    // posibles respuestas (interceptada la respuesta):
+    //const resp = fetch(event.request.url)
+    //const resp = fetch('img/main.jpg') // se puede usar una imagen u otro archivo (style.css) como respuesta
+    //const resp = fetch(event.request)
+
+    // Otra forma de inteceptar una respuesta, por ejemplo, para cambiar los estilos
+    if (event.request.url.includes('style.css')) {
+        // const resp = fetch('style-sw.css') // cargar otro archivo de stilos
+        const resp = new Response('body { background-color: red; }', headers: { Content-Type: 'text/css'});  // se genera una nueva respuesta con un nuevo estilo
+        event.respondWith(resp);
+    }
+
+    // Manejo de errores (recuerda que el error 404 o resp.ok=false no se captura con el catch)
+    const resp = fetch( event.request )
+        .then( resp => {
+            return resp.ok ? resp : fetch('img/main.jpg');  // en caso de que hay algún error, entonces carga una imagen
+        });
+    event.respondWith(resp) // Enviar respuesta o `return resp;` para devolver la respuesta sin interceptar como una promesa
+
+  })
+} else {
+  console.log('SW not installed')
+  // No se puede instalar el SW en el navegador, por lo que no se hace nada
+}
+```
+
+_El archivo sw.js debe de estar ubicado junto con el archivo index.html para que tenga acceso a todos los archivos de la web._
+_Sí ha habido al menos un cambio en al archivo del SW, el navegador intentará reinstalarlo._
+
 #### Fuentes
 
+- [Can I use Service Worker](https://caniuse.com/?search=service%20worker)
+- [jshint generator o eslint extensión de VSCode](https://import.cdn.thinkific.com/643563/courses/2086052/renombrarajshintrc-230130-095406.zip)
+- [MDN Response()](https://developer.mozilla.org/es/docs/Web/API/Response)
 - [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/)
+
 - [Service Worker Lifecycle](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API)
 - [Fetch Event](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)
 - [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
