@@ -282,6 +282,10 @@ _Sí ha habido al menos un cambio en al archivo del SW, el navegador intentará 
 - [MDN Response()](https://developer.mozilla.org/es/docs/Web/API/Response)
 - [Service Workers](https://developers.google.com/web/fundamentals/primers/service-workers/)
 
+### Sección 5: Ciclo de vida de un Service Worker y los listeners más comunes
+
+#### Fuentes
+
 - [Service Worker Lifecycle](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API)
 - [Fetch Event](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)
 - [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
