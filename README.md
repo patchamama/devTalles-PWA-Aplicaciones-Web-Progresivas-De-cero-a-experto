@@ -341,7 +341,7 @@ self.addEventListener('sync', (event) => {
 
 // PUSH: Manejar las push notifications
 self.addEventListener('push', (event) => {
-  console.log('Notificacion recibida')
+  console.log('Notificación recibida')
 })
 
 // ---------------------------------------------
@@ -423,18 +423,42 @@ _APP SHELL: es todo lo que la aplicación necesita para funcionar y puede ser co
 
 Estrategias del caché (en el elemento fetch del EventListener):
 
-- **Cache Only**: solo se carga el archivo si existe en el caché. Si no, se descarga del servidor, es decir, se almacena todo en el caché para después acceder a estos archivos desde este.
+- **Cache Only**: solo se carga el archivo si existe en el caché.
 
 ```js
+// 1 - Cache Only
 self.addEventListener('fetch', (e) => {
-    // 1 - Cache Only
     e.respondWith(caches.match(e.request); // Si existe en el caché, devuelve una respuesta con el contenido del archivo
+});
+```
+
+- **Cache with network fallback**: se carga el archivo si existe en el caché, sino se descarga del servidor y se almacena todo en el caché para después acceder a estos archivos desde este.
+
+```js
+// 2 - Cache with network fallback
+self.addEventListener('fetch', (e) => {
+    const CACHE_NAME = 'cache-v1';
+    const resp = caches.match(e.request)
+        .then((res) => {
+            if (res) return res; // lee el archivo del caché y devuelve la respuesta con su contenido
+
+            // No existe el archivo,
+            // entonces hay que descargarlo de la web
+            console.log('No existe en el caché, descargando del servidor...');
+            return fetch(e.request).then( newResp => {
+                // Guarda el archivo en el caché
+                caches.open(CACHE_NAME)
+                    .then(cache => {
+                        cache.put(e.request, newResp)  //   Guarda el contenido (newResp) del archivo o url (e.request) en el caché
+                });
+                return newResp.clone();  // Hay que devolver la respuesta para que sea usada en el futuro usando clone
+            })
 });
 ```
 
 #### Fuentes
 
-- Cache Storage MDN](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage)
+- [Cache Storage MDN](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage)
 - [Fetch Event](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)
 - [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
 - [Cache Storage API](https://developer.mozilla.org/es/docs/Web/API/CacheStorage)
