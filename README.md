@@ -413,7 +413,7 @@ self.addEventListener('install', (event) => {
         });
 
         // Listar los archivos en el caché (keys)
-        caches.keys().then(key => console.log('Key', key))
+        caches.keys().then(keys => console.log('Keys', keys))
 
     }
 });
@@ -432,13 +432,13 @@ self.addEventListener('fetch', (e) => {
 });
 ```
 
-- **Cache with network fallback**: se carga el archivo si existe en el caché, sino se descarga del servidor y se almacena todo en el caché para después acceder a estos archivos desde este.
+- **Cache with network fallback**: se carga el archivo si existe en el caché, sino se descarga del servidor y se almacena todo en el caché para después acceder a estos archivos desde este. El problema de esto es que podríamos mezclar en el caché contenido dinámico con contenido estático APP SHELL y quizás sería mejor crear diferentes caché para estos contenidos.
 
 ```js
 // 2 - Cache with network fallback
 self.addEventListener('fetch', (e) => {
     const CACHE_NAME = 'cache-v1';
-    const resp = caches.match(e.request)
+    const resp = caches.match(e.request)  // Busca en todos los cachés existentes
         .then((res) => {
             if (res) return res; // lee el archivo del caché y devuelve la respuesta con su contenido
 
@@ -455,6 +455,8 @@ self.addEventListener('fetch', (e) => {
             })
 });
 ```
+
+- **Inmutable cache**: Es un caché que se actualiza solo una vez, y luego es inmutable. Por ejemplo, una imagen de fondo en el navegador o un css como bootstrap. En este caso tendríamos que crear un nuevo caché para guardar los archivos que se actualicen una vez y luego no se actualicen más, teniendo al final tres cachés: uno para los archivos que se actualicen una vez (inmutable), otro para los archivos que se actualicen frecuentemente (dinámico) y otro para los archivos estáticos como los _APP SHELL_.
 
 #### Fuentes
 
