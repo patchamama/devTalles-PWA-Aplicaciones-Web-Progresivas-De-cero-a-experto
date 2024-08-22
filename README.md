@@ -458,10 +458,17 @@ self.addEventListener('fetch', (e) => {
 
 - **Inmutable cache**: Es un caché que se actualiza solo una vez, y luego es inmutable. Por ejemplo, una imagen de fondo en el navegador o un css como bootstrap. En este caso tendríamos que crear un nuevo caché para guardar los archivos que se actualicen una vez y luego no se actualicen más, teniendo al final tres cachés: uno para los archivos que se actualicen una vez (inmutable), otro para los archivos que se actualicen frecuentemente (dinámico) y otro para los archivos estáticos como los _APP SHELL_.
 
+### React/PWA - Cache API
+
+- Instalar React con CRA-PWA: `npx create-react-app --template cra-template-pwa`
+- Editar `src/service-worker.js` y agregar el código de cacheo según nuestras necesidades, eligiendo los archivos que se actualicen frecuentemente y los que se actualicen una vez. También agregar el código de cacheo para los archivos estáticos como _APP SHELL_. Podemos elegir varias estrategias:
+  - Cache First (CacheFirst): Primero se busca en el caché, si no está, se descarga del servidor y se brinda el contenido más se actualiza el caché.
+  - Cache and Network (StaleWhilerevalidate): Primero se busca en el caché, si no está, se descarga del servidor más se actualiza el caché. Si hay una respuesta de cache, se usa ese archivo.
+  - Network First: Primero se descarga del servidor, si está offline, se usa el caché de existir ahí.
+
+Con `registerRoute` es posible agregar rutas para cachear, pero se debe especificar el archivo de cacheo en el `serviceWorker.js`. También se puede elegir la estrategia de cacheo ahí.
+
 #### Fuentes
 
-- [Cache Storage MDN](https://developer.mozilla.org/en-US/docs/Web/API/CacheStorage)
-- [Fetch Event](https://developer.mozilla.org/en-US/docs/Web/API/FetchEvent)
-- [Cache API](https://developer.mozilla.org/en-US/docs/Web/API/Cache)
-- [Cache Storage API](https://developer.mozilla.org/es/docs/Web/API/CacheStorage)
-- [Cache Keys](https://developers.google.com/web/ilt/pwa/caching-files-with-service-worker#cache_keys)
+- [React - CRA - Making a Progressive Web App](https://create-react-app.dev/docs/making-a-progressive-web-app/)
+- [Ejemplos](https://github.com/imranhsayed/react-workshop/blob/05-react-pwa-workbox-example/src/src-sw.js)
