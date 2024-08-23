@@ -436,35 +436,124 @@ self.addEventListener('fetch', (e) => {
 
 ```js
 // 2 - Cache with network fallback
+const CACHE_NAME = 'cache-v1'
 self.addEventListener('fetch', (e) => {
-    const CACHE_NAME = 'cache-v1';
-    const resp = caches.match(e.request)  // Busca en todos los cachés existentes
-        .then((res) => {
-            if (res) return res; // lee el archivo del caché y devuelve la respuesta con su contenido
+  const resp = caches
+    .match(e.request) // Busca en todos los cachés existentes
+    .then((res) => {
+      if (res) return res // lee el archivo del caché y devuelve la respuesta con su contenido
 
-            // No existe el archivo,
-            // entonces hay que descargarlo de la web
-            console.log('No existe en el caché, descargando del servidor...');
-            return fetch(e.request).then( newResp => {
-                // Guarda el archivo en el caché
-                caches.open(CACHE_NAME)
-                    .then(cache => {
-                        cache.put(e.request, newResp)  //   Guarda el contenido (newResp) del archivo o url (e.request) en el caché
-                });
-                return newResp.clone();  // Hay que devolver la respuesta para que sea usada en el futuro usando clone
-            })
-});
+      // No existe el archivo,
+      // entonces hay que descargarlo de la web
+      console.log('No existe en el caché, descargando del servidor...')
+      return fetch(e.request).then((newResp) => {
+        // Guarda el archivo en el caché
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(e.request, newResp) //   Guarda el contenido (newResp) del archivo o url (e.request) en el caché
+        })
+        return newResp.clone() // Hay que devolver la respuesta para que sea usada en el futuro usando clone
+      })
+    })
+  e.respondWith(resp)
+})
 ```
 
 - **Inmutable cache**: Es un caché que se actualiza solo una vez, y luego es inmutable. Por ejemplo, una imagen de fondo en el navegador o un css como bootstrap. En este caso tendríamos que crear un nuevo caché para guardar los archivos que se actualicen una vez y luego no se actualicen más, teniendo al final tres cachés: uno para los archivos que se actualicen una vez (inmutable), otro para los archivos que se actualicen frecuentemente (dinámico) y otro para los archivos estáticos como los _APP SHELL_.
 
-### React/PWA - Cache API
+- **Network with cache fallback**: Siempre se responde a la solicitud del navegador, pero si el servidor no responde se intentará obtener una copia del caché.
+
+```js
+//3- Network with cache fallback
+const CACHE_DYNAMIC_NAME = 'cache-dynamic-v1'
+const CACHE_DYNAMIC_LIMIT = 50
+self.addEventListener('fetch', (e) => {
+  const respuesta = fetch(e.request)
+    .then((res) => {
+      if (!res) return caches.match(e.request)
+      caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
+        cache.put(e.request, res)
+        limpiarCache(CACHE_DYNAMIC_NAME, CACHE_DYNAMIC_LIMIT)
+      })
+      return res.clone()
+    })
+    .catch((err) => {
+      return caches.match(e.request)
+    })
+  e.respondWith(resp)
+})
+```
+
+- **Cache with network update**: Se responde con la copia del caché y se actualiza el mismo con la copia del servidor. En este caso es bueno cuando el rendimiento es crítico, pero siempre estarán un paso atrás de la copia del servidor al responderse con la copia anterior que es la actual del caché (antes de actualizarse).
+
+```js
+// 4- Cache with network update
+const CACHE_STATIC_NAME = 'cache-static-v1'
+self.addEventListener('fetch', (e) => {
+  if (e.request.url.includes('bootstrap')) {
+    return e.respondWith(caches.match(e.request))
+  }
+  const respuesta = caches.open(CACHE_STATIC_NAME).then((cache) => {
+    fetch(e.request).then((newRes) => cache.put(e.request, newRes))
+    return cache.match(e.request)
+  })
+  e.respondWith(respuesta)
+})
+```
+
+- **Cache & Network Race**: Es una mezcla que permite responder con la copia del caché o el servidor (copia de internet) de forma rápida, y sí las dos fallan entonces se devuelve un error (que puede ser una página personalizada html, jpg).
+
+```js
+self.addEventListener('fetch', (e) => {
+  // 5- Cache & Network Race
+
+  const respuesta = new Promise((resolve, reject) => {
+    let rechazada = false
+
+    const falloUnaVez = () => {
+      if (rechazada) {
+        if (/\.(png|jpg)$/i.test(e.request.url)) {
+          resolve(caches.match('/img/no-img.jpg'))
+        } else if (e.request.headers.get('accept').includes('text/html')) {
+          resolve(caches.match('/pages/offline.html'))
+        } else {
+          reject('No se encontró respuesta')
+        }
+      } else {
+        rechazada = true
+      }
+    }
+
+    fetch(e.request)
+      .then((res) => {
+        res.ok ? resolve(res) : falloUnaVez()
+      })
+      .catch(falloUnaVez)
+
+    caches
+      .match(e.request)
+      .then((res) => {
+        res ? resolve(res) : falloUnaVez()
+      })
+      .catch(falloUnaVez)
+  })
+
+  e.respondWith(respuesta)
+})
+```
+
+#### Recursos
+
+- [David Walsh - Cache](https://davidwalsh.name/cache)
+- [Google Developers - Cache API](https://developers.google.com/web/fundamentals/instant-and-offline/web-storage/cache-api?hl=es)
+
+### 12. React/PWA - Cache API
 
 - Instalar React con CRA-PWA: `npx create-react-app --template cra-template-pwa`
 - Editar `src/service-worker.js` y agregar el código de cacheo según nuestras necesidades, eligiendo los archivos que se actualicen frecuentemente y los que se actualicen una vez. También agregar el código de cacheo para los archivos estáticos como _APP SHELL_. Podemos elegir varias estrategias:
-  - Cache First (CacheFirst): Primero se busca en el caché, si no está, se descarga del servidor y se brinda el contenido más se actualiza el caché.
-  - Cache and Network (StaleWhilerevalidate): Primero se busca en el caché, si no está, se descarga del servidor más se actualiza el caché. Si hay una respuesta de cache, se usa ese archivo.
-  - Network First: Primero se descarga del servidor, si está offline, se usa el caché de existir ahí.
+  - Cache with network fallback (CacheFirst): Primero se busca en el caché, si no está, se descarga del servidor y se brinda el contenido más se actualiza el caché.
+  - Cache with Network update (StaleWhilerevalidate): Primero se busca en el caché, si no está, se descarga del servidor más se actualiza el caché. Si hay una respuesta de cache, se usa ese archivo.
+  - Cache only,
+  - Network with Cache fallback,
 
 Con `registerRoute` es posible agregar rutas para cachear, pero se debe especificar el archivo de cacheo en el `serviceWorker.js`. También se puede elegir la estrategia de cacheo ahí.
 
