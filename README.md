@@ -1,4 +1,4 @@
-# devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto
+# devTalles PWA: Aplicaciones Web Progresivas. De cero a experto
 
 _https://cursos.devtalles.com/courses/take/PWA_
 
@@ -552,14 +552,14 @@ Todos los ejemplos están en la carpeta: [PWA/05-navegacion-offline](https://git
 
 ### 12. React/PWA - Cache API
 
-- Instalar React con CRA-PWA: `npx create-react-app --template cra-template-pwa`
-- Editar `src/service-worker.js` y agregar el código de cacheo según nuestras necesidades, eligiendo los archivos que se actualicen frecuentemente y los que se actualicen una vez. También agregar el código de cacheo para los archivos estáticos como _APP SHELL_. Podemos elegir varias estrategias:
+- Instalar react
+
+  - Instalar React con CRA-PWA: `npx create-react-app --template cra-template-pwa` (en CRA se incluyen automáticamente todas las librerías necesarias para crear aplicaciones web progresivas). Sí se desea actualizar un proyecto ya existente de CRA, se pueden mudar los archivos de configuración de otro proyecto ya existente a la carpeta `public` y `src` del proyecto (serviceWorkerRegistration.js, service-worker.js, manifest.json, logos, la declaración de manifest.json en index,...).
+  - Usando vite: `npm install -D vite-plugin-pwa` (probar esto)
+
+- Editar `src/service-worker.js` y agregar el código de cacheo según nuestras necesidades, eligiendo los archivos que se actualicen frecuentemente y los que se actualicen una vez. Con `registerRoute` se puede lograr esto. También agregar el código de cacheo para los archivos estáticos como _APP SHELL_. Podemos elegir varias estrategias:
   - Cache with network fallback (CacheFirst): Primero se busca en el caché, si no está, se descarga del servidor y se brinda el contenido más se actualiza el caché.
   - Cache with Network update (StaleWhilerevalidate): Primero se busca en el caché, si no está, se descarga del servidor más se actualiza el caché. Si hay una respuesta de cache, se usa ese archivo.
-  - Cache only,
-  - Network with Cache fallback,
-
-Con `registerRoute` es posible agregar rutas para cachear, pero se debe especificar el archivo de cacheo en el `serviceWorker.js`. También se puede elegir la estrategia de cacheo ahí.
 
 #### Fuentes
 
