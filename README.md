@@ -541,10 +541,14 @@ self.addEventListener('fetch', (e) => {
 })
 ```
 
+Todos los ejemplos están en la carpeta: [PWA/05-navegacion-offline](https://github.com/patchamama/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/tree/main/PWA/05-navegacion-offline)
+
 #### Recursos
 
 - [David Walsh - Cache](https://davidwalsh.name/cache)
 - [Google Developers - Cache API](https://developers.google.com/web/fundamentals/instant-and-offline/web-storage/cache-api?hl=es)
+
+### Sección 7: Despliegues a dispositivos móviles
 
 ### 12. React/PWA - Cache API
 
