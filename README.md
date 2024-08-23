@@ -550,7 +550,9 @@ Todos los ejemplos están en la carpeta: [PWA/05-navegacion-offline](https://git
 
 ### Sección 7: Despliegues a dispositivos móviles
 
-### 12. React/PWA - Cache API
+### Sección 12. React/PWA - Cache API (complemento adicional)
+
+_Esta sección no existe en el curso pero lo he agregado con mis propias notas para lograr integrarlo en aplicaciones de react._
 
 - Instalar react
 
