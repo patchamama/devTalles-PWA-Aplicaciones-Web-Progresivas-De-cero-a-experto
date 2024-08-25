@@ -556,7 +556,30 @@ Todos los ejemplos están en la carpeta: [PWA/05-navegacion-offline](https://git
   - [material+de+clase+-+Manifest.zip](https://import.cdn.thinkific.com/643563/courses/2086052/materialdeclaseManifest-230130-114952.zip)
   - [El+manifiesto+Google+Developer.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/ElmanifiestoGoogleDeveloper-230130-114952.pdf)
 
+  - Generadores de Manifest.json
+    - https://app-manifest.firebaseapp.com/ (recomendado)
+    - https://tomitm.github.io/appmanifest/
+
 - [Aplicación en Github Pages](https://patchamama.github.io/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/)
+
+**Style.css. Código CSS para prevenir el pull to refresh, select, highlight y callouts así**
+
+```css
+/* for PwA prevent pull to refresh, select, highlight and callouts */
+body {
+  overscroll-behavior-y: contain;
+  -webkit-user-select: none;
+  -webkit-tag-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+```
+
+### Recursos
+
+- [Guía de estilos IOS - medium](https://medium.com/appscope/designing-native-like-progressive-web-apps-for-ios-1b3cdda1d0e8)
+- [PDF con guía de estilos IOS](https://import.cdn.thinkific.com/643563/courses/2086052/Guiadeestilosios-230130-115131.pdf)
+
+### Sección 8: IndexedDB - Reforzamiento de base de datos local
 
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
