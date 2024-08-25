@@ -586,6 +586,66 @@ body {
 #### Recursos
 
 - [MDN - IndexedDB](https://developer.mozilla.org/es/docs/Web/API/IndexedDB_API)
+- [Getting Started Guide - PouchDB](https://pouchdb.com/guides/getting-started.html)
+- [Getting+Started+Guide.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/GettingStartedGuide-230130-133117.pdf)
+- [pouchdb-getting-started-todo.zip](https://import.cdn.thinkific.com/643563/courses/2086052/pouchdbgettingstartedtodo-230130-133117.zip)
+
+- PouchDB - [API Reference - PouchDB](https://pouchdb.com/api.html). Ejemplo CRUD:
+
+```js
+// Agregar referencia de PouchDB en el proyecto desde cdn:
+import PouchDB from 'https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js'
+// o puede ser importado desde el html
+// <script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script>
+
+// Crear nueva base de datos con nombre "mydb"
+const db = new PouchDB('mydb')
+// Objeto a grabar en base de datos
+const obj = {
+  _id: new Date().toISOString(),
+  title: 'My Todo',
+  isComplete: false
+}
+// Grabar objeto en base de datos
+db.put(obj).then(() => {
+  // sí el objeto ya existe, se actualiza, normalmente sí la base de datos está vacía, se crea o sí el id no existe
+  console.log('Todo added to database')
+})
+// Obtener todos los objetos de la base de datos
+db.allDocs({ include_docs: true, descending: false }).then((doc) => {
+  console.log('All docs :', doc)
+})
+// Obtener un solo objeto de la base de datos
+db.get('1234567890').then((doc) => {
+  console.log('Doc 1:', doc)
+})
+// Cambiar el valor de isComplete en cada uno de los objetos de la base de datos
+db.allDocs({ include_docs: true, descending: false }).then((doc) => {
+  doc.rows.forEach((row, index) => {
+    let doc = row.doc // let {row} = doc;
+    doc.isComplete = true
+    db.put(doc)
+  })
+})
+// Eliminar todos los registros de la base de datos que tengan isComplete = true
+db.allDocs({ include_docs: true, descending: false }).then((doc) => {
+  doc.rows.forEach((row, index) => {
+    let doc = row.doc // let {row}  = doc;
+    if (doc.isComplete === true) {
+      db.remove(doc)
+      console.log('Removed doc:', doc)
+    }
+  })
+})
+// Eliminar todos los registros de la base de datos
+db.allDocs({ include_docs: true, descending: false }).then((doc) => {
+  doc.rows.forEach((row, index) => {
+    let doc = row.doc // let  {row}  = doc;
+    db.remove(doc)
+    console.log('Removed doc:', doc)
+  })
+})
+```
 
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
