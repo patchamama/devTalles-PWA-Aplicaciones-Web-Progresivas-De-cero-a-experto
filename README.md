@@ -2,6 +2,8 @@
 
 _https://cursos.devtalles.com/courses/take/PWA_
 
+[LIVE APP - Aplicación en Github Pages ya deployed](https://patchamama.github.io/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/)
+
 ## Secciones
 
 ### Sección 2: Fundamentos de las aplicaciones web progresivas
@@ -560,7 +562,7 @@ Todos los ejemplos están en la carpeta: [PWA/05-navegacion-offline](https://git
     - https://app-manifest.firebaseapp.com/ (recomendado)
     - https://tomitm.github.io/appmanifest/
 
-- [Aplicación en Github Pages](https://patchamama.github.io/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/)
+- [LIVE APP - Aplicación en Github Pages ya deployed](https://patchamama.github.io/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/)
 
 **Style.css. Código CSS para prevenir el pull to refresh, select, highlight y callouts así**
 
@@ -580,6 +582,10 @@ body {
 - [PDF con guía de estilos IOS](https://import.cdn.thinkific.com/643563/courses/2086052/Guiadeestilosios-230130-115131.pdf)
 
 ### Sección 8: IndexedDB - Reforzamiento de base de datos local
+
+#### Recursos
+
+- [MDN - IndexedDB](https://developer.mozilla.org/es/docs/Web/API/IndexedDB_API)
 
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
