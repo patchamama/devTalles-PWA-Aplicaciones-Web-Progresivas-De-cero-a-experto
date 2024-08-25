@@ -590,7 +590,7 @@ body {
 - [Getting+Started+Guide.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/GettingStartedGuide-230130-133117.pdf)
 - [pouchdb-getting-started-todo.zip](https://import.cdn.thinkific.com/643563/courses/2086052/pouchdbgettingstartedtodo-230130-133117.zip)
 
-- PouchDB - [API Reference - PouchDB](https://pouchdb.com/api.html). Ejemplo CRUD:
+#### PouchDB - [API Reference - PouchDB](https://pouchdb.com/api.html). Ejemplo `CRUD`:
 
 ```js
 // Agregar referencia de PouchDB en el proyecto desde cdn:
@@ -646,6 +646,8 @@ db.allDocs({ include_docs: true, descending: false }).then((doc) => {
   })
 })
 ```
+
+### Sección 9: Sincronización sin conexión - Offline Synchronization
 
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
