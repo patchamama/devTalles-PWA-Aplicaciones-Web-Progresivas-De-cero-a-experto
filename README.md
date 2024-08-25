@@ -556,7 +556,7 @@ Todos los ejemplos están en la carpeta: [PWA/05-navegacion-offline](https://git
   - [material+de+clase+-+Manifest.zip](https://import.cdn.thinkific.com/643563/courses/2086052/materialdeclaseManifest-230130-114952.zip)
   - [El+manifiesto+Google+Developer.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/ElmanifiestoGoogleDeveloper-230130-114952.pdf)
 
-- [Aplicación en Github Pages]()
+- [Aplicación en Github Pages](https://patchamama.github.io/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/)
 
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
