@@ -649,6 +649,17 @@ db.allDocs({ include_docs: true, descending: false }).then((doc) => {
 
 ### Sección 9: Sincronización sin conexión - Offline Synchronization
 
+- Inicio del proyecto y backend server
+
+```js
+cd 09-twittor-offline-posting
+rm package-lock.json
+npm install
+npm run dev
+# abrir navegador en una nueva terminal
+open localhost:3000
+```
+
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
 _Esta sección no existe en el curso pero lo he agregado con mis propias notas para lograr integrarlo en aplicaciones de react._
