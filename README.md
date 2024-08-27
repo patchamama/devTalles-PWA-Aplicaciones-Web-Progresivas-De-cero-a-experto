@@ -718,6 +718,8 @@ self.addEventListener('sync', (e) => {
 
 - Material Notifications: https://github.com/dmuy/Material-Toast
 
+### Sección 10: Notifications - Push Notifications - Push Server
+
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
 _Esta sección no existe en el curso pero lo he agregado con mis propias notas para lograr integrarlo en aplicaciones de react._
