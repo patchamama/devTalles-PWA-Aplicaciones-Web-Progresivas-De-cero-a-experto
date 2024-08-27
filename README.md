@@ -594,8 +594,8 @@ body {
 
 ```js
 // Agregar referencia de PouchDB en el proyecto desde cdn:
-import PouchDB from 'https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js'
-// o puede ser importado desde el html
+importScripts('https://cdn.jsdelivr.net/npm/pouchdb@7.0.0/dist/pouchdb.min.js')
+// y puede ser importado desde el html
 // <script src="https://cdn.jsdelivr.net/npm/pouchdb@9.0.0/dist/pouchdb.min.js"></script>
 
 // Crear nueva base de datos con nombre "mydb"
@@ -659,6 +659,64 @@ npm run dev
 # abrir navegador en una nueva terminal
 open localhost:3000
 ```
+
+- Mostrar en consola sí está online o no la conexión
+
+```js
+importScripts(
+  'https://cdn.jsdelivr.net/npm/md-toast@0.0.1-alpha.1/toast.min.js'
+)
+// agregar el toast.min.css en el index.html
+// <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/dmuy/Material-Toast@{version}/dist/mdtoast.css">
+// Detectar cambios de conexión
+function isOnline() {
+  if (navigator.onLine) {
+    // tenemos conexión
+    // console.log('online');
+    // postear en la base de datos
+    $.mdtoast('Online', {
+      interaction: true,
+      interactionTimeout: 1000,
+      actionText: 'OK!'
+    })
+  } else {
+    // No tenemos conexión
+    $.mdtoast('Offline', {
+      interaction: true,
+      actionText: 'OK',
+      type: 'warning'
+    })
+  }
+}
+
+window.addEventListener('online', isOnline)
+window.addEventListener('offline', isOnline)
+
+isOnline()
+```
+
+- Se puede grabar una acción de sync para cuando se recupere la conexión a internet con una instrucción:
+
+```js
+// ...
+self.registration.sync.register('nuevo-post')
+// ...
+
+// tareas asíncronas cuando se recupere la internet
+self.addEventListener('sync', (e) => {
+  console.log('SW: Sync')
+
+  if (e.tag === 'nuevo-post') {
+    // postear a BD cuando hay conexión
+    const respuesta = postearMensajes()
+    e.waitUntil(respuesta)
+  }
+})
+```
+
+### Recursos
+
+- Material Notifications: https://github.com/dmuy/Material-Toast
 
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
