@@ -771,6 +771,8 @@ notificarme()
 - [Web Fundamentals - Google Developers](https://web.dev/push-notifications-display-a-notification/)
 - [Patrones de vibración](https://gearside.com/custom-vibration-patterns-mobile-devices/)
 
+### Sección 11: Recursos Nativos
+
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
 _Esta sección no existe en el curso pero lo he agregado con mis propias notas para lograr integrarlo en aplicaciones de react._
