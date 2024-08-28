@@ -699,6 +699,7 @@ isOnline()
 
 ```js
 // ...
+// Generar un registro para ser capturado después en el EventListener sí se ha perdido la conexión y por ejemplo, se desea grabar un post en la bds del navegador para después hacer el postear en el servidor al recuperarse la internet
 self.registration.sync.register('nuevo-post')
 // ...
 
@@ -719,6 +720,56 @@ self.addEventListener('sync', (e) => {
 - Material Notifications: https://github.com/dmuy/Material-Toast
 
 ### Sección 10: Notifications - Push Notifications - Push Server
+
+- Permisos para notificaciones
+
+```js
+function enviarNotificacion() {
+  const notificationOpts = {
+    body: 'Este es el cuerpo de la notificación',
+    icon: 'img/icons/icon-72x72.png'
+  }
+
+  const n = new Notification('Hola Mundo', notificationOpts)
+
+  n.onclick = () => {
+    console.log('Click')
+  }
+}
+
+function notificarme() {
+  if (!window.Notification) {
+    console.log('Este navegador no soporta notificaciones')
+    return
+  }
+
+  if (Notification.permission === 'granted') {
+    new Notification('Hola Mundo! - granted')
+    // enviarNotificacion()
+  } else if (
+    Notification.permission !== 'denied' ||
+    Notification.permission === 'default'
+  ) {
+    Notification.requestPermission(function (permission) {
+      console.log(permission)
+      if (permission === 'granted') {
+        new Notification('Hola Mundo! - pregunta')
+        // enviarNotificacion()
+      }
+    })
+  }
+}
+
+notificarme()
+```
+
+#### Recursos
+
+- [npm web-push](https://www.npmjs.com/package/web-push)
+- [npm urlsafe-base64](https://www.npmjs.com/package/urlsafe-base64)
+- [Web-Push package](https://www.npmjs.com/package/web-push)
+- [Web Fundamentals - Google Developers](https://web.dev/push-notifications-display-a-notification/)
+- [Patrones de vibración](https://gearside.com/custom-vibration-patterns-mobile-devices/)
 
 ### Sección 12. React/PWA - Cache API (complemento adicional)
 
