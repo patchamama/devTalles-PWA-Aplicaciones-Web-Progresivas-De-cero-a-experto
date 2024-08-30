@@ -4,6 +4,8 @@ _https://cursos.devtalles.com/courses/take/PWA_
 
 [LIVE APP - Aplicación en Github Pages ya deployed](https://patchamama.github.io/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/)
 
+### Herramientas genéricas
+
 - [PWABuilder - Chequea/test/valida página web PWA: manifest.json, service-worker.js con generadores y creador de logos y descarga de app](https://www.pwabuilder.com/)
 - [Documentation de PWABuilder](https://docs.pwabuilder.com/#/)
 - [PWA Icons & iOS Splash Screen Generator](https://progressier.com/pwa-icons-and-ios-splash-screen-generator)
