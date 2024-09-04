@@ -9,6 +9,8 @@ _https://cursos.devtalles.com/courses/take/PWA_
 - [PWABuilder - Chequea/test/valida página web PWA: manifest.json, service-worker.js con generadores y creador de logos y descarga de app](https://www.pwabuilder.com/)
 - [Documentation de PWABuilder](https://docs.pwabuilder.com/#/)
 - [PWA Icons & iOS Splash Screen Generator](https://progressier.com/pwa-icons-and-ios-splash-screen-generator)
+- [Android Studios (incluye emulator para correr aplicaciones android)](https://developer.android.com/studio)
+- [Adaptative Icons for Android](https://stackoverflow.com/questions/57662418/adaptive-icons-on-android-9-with-web-app-manifest) | [editor to create it](https://maskable.app/editor) | [Documentatión](https://web.dev/articles/maskable-icon?hl=es-419)
 
 ## Secciones
 
@@ -382,6 +384,7 @@ if (navigator.serviceWorker) {
 
 - [Can I Use : Sync Manager](https://caniuse.com/?search=syncmanager)
 - [Service Worker Lifecycle](https://developer.mozilla.org/es/docs/Web/API/Service_Worker_API)
+- [How to make PWAs re-engageable using Notifications and Push](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Tutorials/js13kGames/Re-engageable_Notifications_Push)
 
 ### Sección 6: Estrategias de Cache y Offline Mode
 
@@ -563,6 +566,7 @@ Todos los ejemplos están en la carpeta: [PWA/05-navegacion-offline](https://git
   - [Google Chrome manifest.json](https://web.dev/add-manifest/)
   - [material+de+clase+-+Manifest.zip](https://import.cdn.thinkific.com/643563/courses/2086052/materialdeclaseManifest-230130-114952.zip)
   - [El+manifiesto+Google+Developer.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/ElmanifiestoGoogleDeveloper-230130-114952.pdf)
+  - [MDN Web app Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) 
 
   - Generadores de Manifest.json
     - https://app-manifest.firebaseapp.com/ (recomendado)
