@@ -11,6 +11,7 @@ _https://cursos.devtalles.com/courses/take/PWA_
 - [PWA Icons & iOS Splash Screen Generator](https://progressier.com/pwa-icons-and-ios-splash-screen-generator)
 - [Android Studios (incluye emulator para correr aplicaciones android)](https://developer.android.com/studio)
 - [Adaptative Icons for Android](https://stackoverflow.com/questions/57662418/adaptive-icons-on-android-9-with-web-app-manifest) | [editor of maskable logos](https://maskable.app/editor) | [Documentación](https://web.dev/articles/maskable-icon?hl=es-419)
+- [Pruebas antes de lanzar app en google play](https://support.google.com/googleplay/android-developer/answer/9842757?hl=es&ref_topic=7071528&sjid=15248319318831200482-EU)
 
 ## Secciones
 
