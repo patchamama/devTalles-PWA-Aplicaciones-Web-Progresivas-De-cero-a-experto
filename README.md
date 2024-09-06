@@ -797,7 +797,7 @@ _Esta sección no existe en el curso pero lo he agregado con mis propias notas p
   - Cache with network fallback (CacheFirst): Primero se busca en el caché, si no está, se descarga del servidor y se brinda el contenido más se actualiza el caché.
   - Cache with Network update (StaleWhilerevalidate): Primero se busca en el caché, si no está, se descarga del servidor más se actualiza el caché. Si hay una respuesta de cache, se usa ese archivo.
 
-- Agregar código de registro de service worker en aplicación que no cargue por defecto el código de react, que puede ser en una página de login, en un index_wrapper.html o base.html de django. [Este](https://github.com/patchamama/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/blob/main/PWA/example-generic-code-serviceWorkerRegister.js) código de ejemplo puede servir. 
+_Sí se desea agregar código de registro de service worker en una aplicación que no cargue por defecto el código de react en la página de inicio, que puede ser en una página de login, en un index_wrapper.html o base.html de django. [Este](https://github.com/patchamama/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/blob/main/PWA/example-generic-code-serviceWorkerRegister.js) código de ejemplo puede servir._
 
 #### Fuentes
 
