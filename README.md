@@ -799,7 +799,11 @@ _Esta sección no existe en el curso pero lo he agregado con mis propias notas p
 
 _Sí se desea agregar código de registro de service worker en una aplicación que no cargue por defecto el código de react en la página de inicio, que puede ser en una página de login, en un index_wrapper.html o base.html de django. [Este](https://github.com/patchamama/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/blob/main/PWA/example-generic-code-serviceWorkerRegister.js) código de ejemplo puede servir._
 
+Una vez creada la PWA, es posible crear los apk(s) para subirla a google play usando esta [guía](https://developers.google.com/codelabs/pwa-in-play?hl=es-419#1) o con [PWABuilder](https://pwabuilder.com). 
+
 #### Fuentes
 
 - [React - CRA - Making a Progressive Web App](https://create-react-app.dev/docs/making-a-progressive-web-app/)
 - [Ejemplos](https://github.com/imranhsayed/react-workshop/blob/05-react-pwa-workbox-example/src/src-sw.js)
+- [Cómo agregar tu app web progresiva a Google Play](https://developers.google.com/codelabs/pwa-in-play?hl=es-419#1) 
+- [PWABuilder](https://pwabuilder.com)
