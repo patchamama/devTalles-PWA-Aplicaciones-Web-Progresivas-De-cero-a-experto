@@ -19,7 +19,7 @@ _https://cursos.devtalles.com/courses/take/PWA_
 
 PWA: Aplicaciones Web Progresivas
 
-_PWA no es: una extensión de navegadores web, un framework como React, Vue o Angular, un plugin o librería para los frameworks, no es parecido a React Native, Native Script ni ionic. Aunque están pensadas en \_mobile first_ no son necesariamente responsive\_
+_PWA no es: una extensión de navegadores web, un framework como React, Vue o Angular, un plugin o librería para los frameworks, no es parecido a React Native, Native Script ni ionic. Aunque están pensadas en *mobile first* no son necesariamente responsive_
 
 _PWA es una aplicación web (también puede ser una página web) que puede implementar push notificación, puede tener una ubicación en el home screen de un dispositivo móvil, puede funcionar offline, usa características del dispositivo (uso de cámara, micrófono...), se actualiza en el dispositivo, es confiable, pesa poco, son por lo general pequeñas, rápida a la hora de cargar y confiable. Es diferente a una aplicación nativa (esta se actualiza en la app store y en la pwa no es necesario hacerlo así y se puede actualizar automáticamente sin permiso del usuario)._
 
