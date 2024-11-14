@@ -6,9 +6,9 @@ _https://cursos.devtalles.com/courses/take/PWA_
 
 ### Herramientas genéricas
 
-- [PWABuilder - Chequea/test/valida página web PWA: manifest.json, service-worker.js con generadores y creador de logos y descarga de app](https://www.pwabuilder.com/)
-- [Documentation de PWABuilder](https://docs.pwabuilder.com/#/)
-- [PWA Icons & iOS Splash Screen Generator](https://progressier.com/pwa-icons-and-ios-splash-screen-generator)
+- [PWABuilder - Chequea/test/valida página web PWA: manifest.json, service-worker.js con generadores y creador de logos y descarga de app](https://www.PWAbuilder.com/)
+- [Documentation de PWABuilder](https://docs.PWAbuilder.com/#/)
+- [PWA Icons & iOS Splash Screen Generator](https://progressier.com/PWA-icons-and-ios-splash-screen-generator)
 - [Android Studios (incluye emulator para correr aplicaciones android)](https://developer.android.com/studio)
 - [Adaptative Icons for Android](https://stackoverflow.com/questions/57662418/adaptive-icons-on-android-9-with-web-app-manifest) | [editor of maskable logos](https://maskable.app/editor) | [Documentación](https://web.dev/articles/maskable-icon?hl=es-419)
 - [Pruebas antes de lanzar app en google play](https://support.google.com/googleplay/android-developer/answer/9842757?hl=es&ref_topic=7071528&sjid=15248319318831200482-EU)
@@ -21,13 +21,13 @@ PWA: Aplicaciones Web Progresivas
 
 _PWA no es: una extensión de navegadores web, un framework como React, Vue o Angular, un plugin o librería para los frameworks, no es parecido a React Native, Native Script ni ionic. Aunque están pensadas en *mobile first* no son necesariamente responsive._
 
-_PWA es una aplicación web (también puede ser una página web) que puede implementar push notificación, puede tener una ubicación en el home screen de un dispositivo móvil, puede funcionar offline, usa características del dispositivo (uso de cámara, micrófono...), se actualiza en el dispositivo, es confiable, pesa poco, son por lo general pequeñas, rápida a la hora de cargar y confiable. Es diferente a una aplicación nativa (esta se actualiza en la app store y en la pwa no es necesario hacerlo así y se puede actualizar automáticamente sin permiso del usuario)._
+_PWA es una aplicación web (también puede ser una página web) que puede implementar push notificación, puede tener una ubicación en el home screen de un dispositivo móvil, puede funcionar offline, usa características del dispositivo (uso de cámara, micrófono...), se actualiza en el dispositivo, es confiable, pesa poco, son por lo general pequeñas, rápida a la hora de cargar y confiable. Es diferente a una aplicación nativa (esta se actualiza en la app store y en la PWA no es necesario hacerlo así y se puede actualizar automáticamente sin permiso del usuario)._
 
 Son importantes pues la mayoría de los visitantes usan un dispositivo móvil por lo que es importante tener una versión web para acceder a las páginas de las empresas.
 
 Sí ya se tiene una aplicación web, no es necesario hacer una aplicación nativa desde cero para portarla a un dispositivo móvil, es suficiente con agregar un grupo de características y convertirla en un PWA:
 
-- Push server (permite hacer notificaciones desde la pwa al dispositivo),
+- Push server (permite hacer notificaciones desde la PWA al dispositivo),
 - indexedDB (permite guardar cambios offline o posteos en una base de datos aunque el usuario no tiene una internet),
 - Manifest (es un archivo json que dice como va a lucir la app cuando esté en el homescreen del dispositivo),
 - Service Worker (_el corazón de una PWA que es un archivo js plano -como sw.js-, al hacerse una petición a internet, este intercepta las peticiones como un proxy y este usa un cache que permite acceder a información de forma rápida o información cacheada sí está offline. Este corre en el background en un hilo independiente de la página web como si fuera una aplicación independiente. Al usarse o accederse a este sí no está instalado, se descarga el js, se parsea o revisa, se instala y activa sí no ha habido ningún error. Una vez instalado pasa al paso waiting en que espera a que se desactiven otros service worker para ejecutarse y tomar el control._)
@@ -37,8 +37,8 @@ PWA solo funciona con localhost usando http (no con ips) o https.
 
 #### Recursos
 
-- [1- que son las pwas.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/1quesonlaspwas-230127-134659.pdf)
-- [2- Por que construir una pwa.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/2Porqueconstruirunapwa-230127-134659.pdf)
+- [1- que son las PWAs.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/1quesonlasPWAs-230127-134659.pdf)
+- [2- Por que construir una PWA.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/2PorqueconstruirunaPWA-230127-134659.pdf)
 - [3- Conceptos clave de las PWA.pdf](https://import.cdn.thinkific.com/643563/courses/2086052/3ConceptosclavedelasPWA-230127-134659.pdf)
 
 ### Sección 3: Reforzamiento Promesas, Fetch API y HttpServer
@@ -790,8 +790,8 @@ _Esta sección no existe en el curso pero lo he agregado con mis propias notas p
 
 - Instalar react
 
-  - Instalar React con CRA-PWA: `npx create-react-app --template cra-template-pwa` (en CRA se incluyen automáticamente todas las librerías necesarias para crear aplicaciones web progresivas). Sí se desea actualizar un proyecto ya existente de CRA, se pueden mudar los archivos de configuración de otro proyecto ya existente a la carpeta `public` y `src` del proyecto (serviceWorkerRegistration.js, service-worker.js, manifest.json, logos, la declaración de manifest.json en index,...).
-  - Usando vite: `npm install -D vite-plugin-pwa` (probar esto)
+  - Instalar React con CRA-PWA: `npx create-react-app --template cra-template-PWA` (en CRA se incluyen automáticamente todas las librerías necesarias para crear aplicaciones web progresivas). Sí se desea actualizar un proyecto ya existente de CRA, se pueden mudar los archivos de configuración de otro proyecto ya existente a la carpeta `public` y `src` del proyecto (serviceWorkerRegistration.js, service-worker.js, manifest.json, logos, la declaración de manifest.json en index,...).
+  - Usando vite: `npm install -D vite-plugin-PWA` (probar esto)
 
 - Editar `src/service-worker.js` y agregar el código de cacheo según nuestras necesidades, eligiendo los archivos que se actualicen frecuentemente y los que se actualicen una vez. Con `registerRoute` se puede lograr esto. También agregar el código de cacheo para los archivos estáticos como _APP SHELL_. Podemos elegir varias estrategias:
   - Cache with network fallback (CacheFirst): Primero se busca en el caché, si no está, se descarga del servidor y se brinda el contenido más se actualiza el caché.
@@ -799,11 +799,11 @@ _Esta sección no existe en el curso pero lo he agregado con mis propias notas p
 
 _Sí se desea agregar código de registro de service worker en una aplicación que no cargue por defecto el código de react en la página de inicio, que puede ser en una página de login, en un index_wrapper.html o base.html de django. [Este](https://github.com/patchamama/devTalles-PWA-Aplicaciones-Web-Progresivas-De-cero-a-experto/blob/main/PWA/example-generic-code-serviceWorkerRegister.js) código de ejemplo puede servir._
 
-Una vez creada la PWA, es posible crear los apk(s) para subirla a google play usando esta [guía](https://developers.google.com/codelabs/pwa-in-play?hl=es-419#1) o con [PWABuilder](https://pwabuilder.com). 
+Una vez creada la PWA, es posible crear los apk(s) para subirla a google play usando esta [guía](https://developers.google.com/codelabs/PWA-in-play?hl=es-419#1) o con [PWABuilder](https://PWAbuilder.com). 
 
 #### Fuentes
 
 - [React - CRA - Making a Progressive Web App](https://create-react-app.dev/docs/making-a-progressive-web-app/)
-- [Ejemplos](https://github.com/imranhsayed/react-workshop/blob/05-react-pwa-workbox-example/src/src-sw.js)
-- [Cómo agregar tu app web progresiva a Google Play](https://developers.google.com/codelabs/pwa-in-play?hl=es-419#1) 
-- [PWABuilder](https://pwabuilder.com)
+- [Ejemplos](https://github.com/imranhsayed/react-workshop/blob/05-react-PWA-workbox-example/src/src-sw.js)
+- [Cómo agregar tu app web progresiva a Google Play](https://developers.google.com/codelabs/PWA-in-play?hl=es-419#1) 
+- [PWABuilder](https://PWAbuilder.com)
